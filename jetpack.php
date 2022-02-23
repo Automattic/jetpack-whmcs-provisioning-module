@@ -218,6 +218,32 @@ function jetpack_AdminServicesTabFields($params)
 }
 
 /**
+ * Output Jetpack License to the WHMCS client area.
+ *
+ * @param array WHMCS $params
+ * @return array Client Area output.
+ */
+function jetpack_ClientArea($params)
+{
+    $license_key = (new JetpackLicenseManager() )->getLicenseKey($params['model']['orderid'], $params['pid']);
+    $license_key = isset($license_key) ? $license_key : 'No License Key Found';
+
+    $domain = null;
+    if (isset($params['domain'])) {
+        $domain = trim($params['domain'], '/');
+        $domain = parse_url($domain, PHP_URL_PATH);
+    }
+
+    return [
+        'templatefile' => 'jetpack_license',
+        'vars' => [
+            'license_key' => $license_key,
+            'domain' => $domain,
+        ],
+    ];
+}
+
+/**
  * Parse Jetpack License APi response errors on non 200 responses
  *
  * @param Exception $e
