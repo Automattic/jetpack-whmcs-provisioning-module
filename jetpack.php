@@ -213,7 +213,33 @@ function jetpack_AdminServicesTabFields($params)
     $license_key = (new JetpackLicenseManager() )->getLicenseKey($params['model']['orderid'], $params['pid']);
     $license_key = isset($license_key) ? $license_key : 'No License Key Found';
     return [
-     'License Key' => '<input type="text" name="licensekey" disabled size="60" value="' . $license_key . '" />',
+     'License Key' => '<input type="text" name="licensekey" class="form-control input-300" disabled size="60" value="' . $license_key . '" />',
+    ];
+}
+
+/**
+ * Output Jetpack License to the WHMCS client area.
+ *
+ * @param array WHMCS $params
+ * @return array Client Area output.
+ */
+function jetpack_ClientArea($params)
+{
+    $license_key = (new JetpackLicenseManager() )->getLicenseKey($params['model']['orderid'], $params['pid']);
+    $license_key = isset($license_key) ? $license_key : 'No License Key Found';
+
+    $domain = null;
+    if (isset($params['domain'])) {
+        $domain = trim($params['domain'], '/');
+        $domain = parse_url($domain, PHP_URL_PATH);
+    }
+
+    return [
+        'templatefile' => 'jetpack_license',
+        'vars' => [
+            'license_key' => $license_key,
+            'domain' => $domain,
+        ],
     ];
 }
 
