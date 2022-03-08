@@ -213,7 +213,7 @@ function jetpack_AdminServicesTabFields($params)
     $license_key = (new JetpackLicenseManager() )->getLicenseKey($params['model']['orderid'], $params['pid']);
     $license_key = isset($license_key) ? $license_key : 'No License Key Found';
     return [
-     'License Key' => '<input type="text" name="licensekey" disabled size="60" value="' . $license_key . '" />',
+     'License Key' => '<input type="text" name="licensekey" class="form-control input-300" disabled size="60" value="' . $license_key . '" />',
     ];
 }
 

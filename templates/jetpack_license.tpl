@@ -14,7 +14,7 @@
 
 <p>
     {if $domain}
-        Ready to activate your license? Copy your license above and click <a href="http://{$domain}/wp-admin/admin.php?page=jetpack#/license/activation" target="_blank"> here </a> to do so.
+        Need to activate your license? Copy your license above and click <a href="http://{$domain}/wp-admin/admin.php?page=jetpack#/license/activation" target="_blank"> here </a> to do so.
     {/if}
 </p>
 
