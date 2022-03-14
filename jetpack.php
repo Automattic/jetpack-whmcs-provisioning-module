@@ -137,7 +137,42 @@ function jetpack_TerminateAccount(array $params)
 }
 
 /**
- * Undocumented function
+ * Attach a license for a Jetpack product to a site using the licensing API.
+ *
+ * @param array WHMCS $params.
+ * @return string Either 'success' or an error with what went wrong when attaching the license.
+ */
+function jetpack_AttachLicense($params) {
+    $license_key = (new JetpackLicenseManager() )->getLicenseKey($params['model']['orderid'], $params['pid']);
+    if (!isset($license_key)) {
+        return 'No license key found for this order. First run the module create command to issue a license.';
+    }
+    if (!isset($params['domain']) || empty($params['domain'])) {
+        return 'No domain specified for this order. To attach the license first set a domain for this order.';
+    }
+
+    try {
+        $license_api_manager = new JetpackLicenseAPIManager($params['configoption1']);
+        $response = $license_api_manager->attachlicense($license_key, $params['domain']);
+        if ($response->getStatusCode() == 200) {
+            return 'success';
+        }
+    } catch (Exception $e) {
+        return parse_response_errors($e);
+    }
+
+    return 'error';
+}
+
+function jetpack_AdminCustomButtonArray() {
+    $button_array = array(
+        "Attach License" => "AttachLicense",
+    );
+    return $button_array;
+}
+
+/**
+ * Get all available Jetpack products.
  *
  * @return void
  */
@@ -229,7 +264,7 @@ function jetpack_ClientArea($params)
     $license_key = isset($license_key) ? $license_key : 'No License Key Found';
 
     $domain = null;
-    if (isset($params['domain'])) {
+    if (isset($params['domain']) && !empty($params['domain'])) {
         $domain = trim($params['domain'], '/');
         $domain = parse_url($domain, PHP_URL_PATH);
     }

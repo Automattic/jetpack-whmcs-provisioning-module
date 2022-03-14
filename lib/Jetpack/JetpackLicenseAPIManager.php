@@ -105,9 +105,26 @@ class JetpackLicenseAPIManager
      * @param string $license license key
      * @return Response
      */
-    public function getJetpackProducts() {
+    public function getJetpackProducts()
+    {
         $response = $this->client->get(
             self::PRODUCTS_API_URI
+        );
+        return $response;
+    }
+
+    /**
+     * Attach a license to a site
+     *
+     * @param string $license_key The license key to be attached
+     * @param string $domain The domain/site to attach the license to.
+     * @return Response
+     */
+    public function attachLicense(string $license_key, string $domain)
+    {
+        $response = $this->client->post(
+            self::LICENSING_API_URI . $license_key . '/site',
+            ['query' => ['site' => $domain]]
         );
         return $response;
     }
