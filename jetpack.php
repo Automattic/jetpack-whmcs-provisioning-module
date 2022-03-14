@@ -172,7 +172,7 @@ function jetpack_AdminCustomButtonArray() {
 }
 
 /**
- * Undocumented function
+ * Get all available Jetpack products.
  *
  * @return void
  */
