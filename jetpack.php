@@ -194,6 +194,28 @@ function jetpack_FetchProducts()
     }
 }
 
+/**
+ * Get product descriptions.
+ *
+ * @return void
+ */
+function jetpack_FetchProductDescriptions()
+{
+    $response =  ( new JetpackLicenseAPIManager() )->getJetpackProducts();
+    if ($response->getStatusCode() == 200) {
+        $product_families = json_decode($response->getBody(), true);
+        $product_list = [];
+        foreach ($product_families as $product_family) {
+            foreach ($product_family['products'] as $product) {
+                $product_list[$product['slug']] = $product_family['description'];
+            }
+        }
+        return $product_list;
+    } else {
+        throw new Exception('Invalid response received while fetching products');
+    }
+}
+
 function get_api_token()
 {
     $api_token = Capsule::table('tblproducts')->select('configoption1')
