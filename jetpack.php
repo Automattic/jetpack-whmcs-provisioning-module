@@ -69,6 +69,11 @@ function jetpack_ConfigOptions()
             'Loader' => 'jetpack_FetchProducts',
             'SimpleMode' => true,
         ],
+        'Show User License' => [
+            'Type' => 'yesno',
+            'SimpleMode' => true,
+            "Description" => "Display the Jetpack license in the client area(True if checked)",
+        ],
     ];
 
     return array_merge($config_options, $licensing_table);
@@ -291,13 +296,15 @@ function jetpack_ClientArea($params)
         $domain = parse_url($domain, PHP_URL_PATH);
     }
 
-    return [
-        'templatefile' => 'jetpack_license',
-        'vars' => [
-            'license_key' => $license_key,
-            'domain' => $domain,
-        ],
-    ];
+    if (isset($params['configoption3']) && !empty($params['configoption3'])) {
+        return [
+            'templatefile' => 'jetpack_license',
+            'vars' => [
+                'license_key' => $license_key,
+                'domain' => $domain,
+            ],
+        ];
+    }
 }
 
 /**
