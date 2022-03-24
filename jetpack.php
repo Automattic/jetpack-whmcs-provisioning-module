@@ -72,7 +72,7 @@ function jetpack_ConfigOptions()
         'Show User License' => [
             'Type' => 'yesno',
             'SimpleMode' => true,
-            "Description" => "Display the Jetpack license in the client area(True if checked)",
+            "Description" => "Display the Jetpack license in the client area (true if checked)",
         ],
     ];
 
