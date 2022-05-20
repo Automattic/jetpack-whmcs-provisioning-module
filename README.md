@@ -19,3 +19,9 @@ The provisioning module has 2 configuration options
 - API Token: Your API token mentioned above which is required for using the Jetpack licensing API.
 - Jetpack Product: The Jetpack product that will be tied to the product being created/sold in WHMCS
 - Show User License: If enabled the license key and instructions for setting up Jetpack will be displayed in the WHMCS user client area.
+
+
+https://user-images.githubusercontent.com/1273880/169432356-54e2c340-ced4-4ebe-b24e-b1f2a03880dd.mov
+
+
+
