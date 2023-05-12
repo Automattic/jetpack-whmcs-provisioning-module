@@ -1,7 +1,7 @@
 # Jetpack WHMCS Provisioning Module
 The Jetpack [WHMCS provisioning module](https://developers.whmcs.com/provisioning-modules/) is intended to assist Jetpack hosting partners who utilize WHMCS in managing Jetpack products for their users. The modules option is available when a product or product addon is created that implements the Jetpack WHMCS provisioning module in the list of available modules.
 
-Once a purchase for a Jetpack product has been completed through WHMCS the Jetpack license can be issued based on one of the 4 available options in WHMCS when creating a new product that involves a module for provisioning(3 Automatic provisioning options and the option to not provision under Module Settings when creating a product).
+Once a purchase for a Jetpack product has been completed through WHMCS the Jetpack license can be issued based on one of the 4 available options in WHMCS when creating a new product that involves a module for provisioning (Automatic provisioning options and the option to not provision under Module Settings when creating a product).
 
 The provisioning module uses standard WHMCS [functions](https://developers.whmcs.com/provisioning-modules/supported-functions/) for creating and terminating accounts to issue and revoke Jetpack licenses using the Jetpack Licensing API. Module functions include both automattic license issuing on checkout as well as the option to both issue and revoke a license using the create and terminate options available with the module.
 
